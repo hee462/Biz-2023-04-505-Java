@@ -1,4 +1,4 @@
-# java 개발자 도구
+:horse: java 개발자 도구
 1. jdk 17 설치 : java.com
 2. 7zip 설치 : 7zip.org
 3. D2codoing font 설치
@@ -26,7 +26,7 @@ git init
 
 - 현재 폴더의 파일과 폴더를  local Repository에압축하고, 암호화하여 보관하기 : `git add .`
 
-- 현재 local Repository에 보관된 압축된 데이터에 대한 Comment 를 추가하기 : ` git commit-m first`
+- 현재 local Repository에 보관된 압축된 데이터에 대한 Comment 를 추가하기 : ` git commit- m first`
 
 - locsl Repository에 보관된 압축된 데이터를 원격 Repository로 push : `git push -u origin master`
 
