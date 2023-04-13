@@ -1,4 +1,4 @@
-package com.hee462.hello;
+package com.hee462.hello.data;
 
 public class HelloGuGuDan {
 	public static void main(String[] args) {
