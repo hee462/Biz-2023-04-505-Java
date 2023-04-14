@@ -25,11 +25,11 @@ public class VarBC {
 		System.out.println(intNum1 % 2 == 0);
 		System.out.println(intNum2 % 2 == 0);
 		/*
-		 * 두 변수에 저장된 값이 모두 짝수인가 ?
+		 * 두 변수에 저장된 값이 모두 짝수인가 ? -> AND  
 		 */
 		System.out.println(intNum1 % 2 == 0 && intNum2 % 2 == 0);
 		/*
-		 * 두 변수의 저장된 값중에 한개라도 짝수인가 ?
+		 * 두 변수의 저장된 값중에 한개라도 짝수인가 ? -> OR
 		 */
 		System.out.println(intNum1 % 2 == 0 || intNum2 % 2 == 0);
 		/*
