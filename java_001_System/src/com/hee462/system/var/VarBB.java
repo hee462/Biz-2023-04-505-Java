@@ -15,7 +15,7 @@ public class VarBB {
 		floatNum1 = floatNum1 + 0.5f;
 		System.out.println(floatNum1); //21.7f 출력
 		/*
-		 * java는 float를 int 로 강제 형변환할대 소수점 이하를 무조건 버린다.
+		 * java는 float를 int 로 강제 형변환 할 때 소수점 이하를 무조건 버린다.
 		 */
 		intNum1 = (int)floatNum1;
 		System.out.println(intNum1);  //21 출력 -> 소수점 삭제
