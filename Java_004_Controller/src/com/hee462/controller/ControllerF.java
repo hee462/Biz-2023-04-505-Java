@@ -13,7 +13,7 @@ public class ControllerF {
 		// 이 for() 명령에 의해 index 값은 2부터 rdnNum -1 까지 연속된 정수로 만들어저 for(){} 에서 사용가능하다
 		for (int index = 2; index < rndNum; index++) {
 			if (rndNum % index == 0) {
-				System.out.print(rndNum + " : ");
+				System.out.print(rndNum + " :"	+ " ");
 				System.out.print(index + "로 나누면 나머지가 ");
 				System.out.print(rndNum % index);
 				System.out.println("  이 수는 소수가 아님");
