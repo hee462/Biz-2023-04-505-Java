@@ -13,16 +13,26 @@ import com.hee462.classes.service.ScoreServiceA;
  */
 public class HOMEWORK {
 	public static void main(String[] args) {
+		// 한 학생의 점수를 관리하기 위한 객체 변수 생성
+		// 생성 = 선언 +초기화 =  사용할 준비가 된 상태
+		// ScoreDto 클래스를 사용하여 score 객체(변수)를 선언
+		// ScoreDto() 생성자 method를 사용하여 객체를 초기화(new) 한다.
+		
 		// ScoreDto type 요소 10를 갖는 배열 선언
 		ScoreDto[] scores = new ScoreDto[10];
-
+		
+		
+		
+		// scores 배열의 개별 요소들을 모두 초기화 한다
+		// scores 배열의 모든 요소들이 초기화되어 사용한 준비가 완료된다.
 		// class type 의 배열 요소 전체를 객체 요소로 생성하기
+		ScoreServiceA scoreService = new ScoreServiceA();
 		for (int index = 0; index < scores.length; index++) {
 			scores[index] = new ScoreDto();
 		}
-
-		ScoreServiceA scoreService = new ScoreServiceA();
-
+		
+		// 학번, 이름, 과목점수를 각 배열의 요소에 세팅
+		// 점수생성 method, 개별 성적출력 method를 활용하여 객체 생성
 		scores[0].stNum = "0001";
 		scores[0].stName = "홍길동";
 		scores[0].scKor = scoreService.getScore();
