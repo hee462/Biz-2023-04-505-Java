@@ -20,7 +20,7 @@ public class ScoreService {
 
 	}
 
-	public static void totalSum(ScoreDto[] score) {
+	public  void totalSum(ScoreDto[] score) {
 
 		int sumTotal = 0;
 		int sumKor = 0;
@@ -35,15 +35,15 @@ public class ScoreService {
 			sumMath += score[i].intMath;
 			sumMusic += score[i].intMusic;
 			sumArt += score[i].intArt;
-			sumTotal = (sumKor+ sumEng + sumMath +sumMusic +sumArt);
-			
+			sumTotal = (sumKor + sumEng + sumMath + sumMusic + sumArt);
+
 		}
-		float avgKor = (float)sumKor / 10;
-		float avgEng = (float)sumEng / 10;
-		float avgMath = (float)sumMath / 10;
-		float avgMusic = (float)sumMusic / 10;
-		float avgArt = (float)sumArt / 10;
-		float totalAvg = (avgKor +avgEng +avgMath+avgMusic+avgArt)/5;
+		float avgKor = (float) sumKor / 10;
+		float avgEng = (float) sumEng / 10;
+		float avgMath = (float) sumMath / 10;
+		float avgMusic = (float) sumMusic / 10;
+		float avgArt = (float) sumArt / 10;
+		float totalAvg = (avgKor + avgEng + avgMath + avgMusic + avgArt) / 5;
 
 		System.out.println("-".repeat(70));
 		System.out.print("총점");
