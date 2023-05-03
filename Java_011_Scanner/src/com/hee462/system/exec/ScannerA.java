@@ -1,15 +1,18 @@
-package com.hee462.classes;
+package com.hee462.system.exec;
 
 import java.util.Scanner;
 
-public class ClassH {
+public class ScannerA {
 	public static void main(String[] args) {
-
+		
 		Scanner scan = new Scanner(System.in);
-
+		
 		int num1 = 0;
-		int num2 = 0;
-while(true) {
+		int num2 =0;
+		
+		// while (조건) 명령문
+		// 조건의 결과가 true 인 동안 무한히 반복하는 명령문
+		while(true) {
 			
 			// prompt(안내문) 먼저 보여주기
 			System.out.println("두 개의 정수를 입력하세요");
@@ -27,6 +30,13 @@ while(true) {
 				break;
 			}
 		}
-
+		
+		
+		
 	}
+	
+	
+	
+	
+	
 }
