@@ -17,7 +17,7 @@ public class ScannerF {
 			int rndNum = (int) (Math.random() * 45) + 1;
 			// rndNum 과 배열안의 숫자가 맞는지 확인
 			for (int i = 0; i < arNums.length; i++) {
-				if (rndNum == arNums[i]) {
+				if (arNums[i] == rndNum) {
 					rndNum = (int) (Math.random() * 45) + 1; // 중복된 값을 새로 만드는 코드
 					i = -1; // 배열 은 0부터 시작함으로 -1을 빼주고 초기화하여 각 배열마다 숫자를 확인하는 코드
 				}
