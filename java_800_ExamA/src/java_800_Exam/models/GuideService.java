@@ -59,6 +59,8 @@ public class GuideService implements java_800_Exam.Service.GuideService {
 			if(id != null &&!id.equals(dto.id)) {
 				System.out.println("-".repeat(150));
 			}
+			id = dto.id;
+			
 			System.out.printf("%s\t" , dto.id);
 			System.out.printf("%s\t" , dto.item);
 			System.out.printf("%s\t" , dto.seq);
