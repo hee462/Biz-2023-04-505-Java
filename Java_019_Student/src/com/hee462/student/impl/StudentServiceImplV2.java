@@ -56,6 +56,7 @@ public class StudentServiceImplV2 extends StudentServiceImplV1 {
 			}
 		}
         // stDto.stNum에 null 값이면 새로운 stDto.stName을 넣는다
+		// 입력된 속성을 확인하는 코드
 		System.out.printf("이름(%s) >> ",stDto.stName == null ? "신규" : stDto.stName);
 		// stName.equals("") ==> 엔터값을 입력하면 기존값 그대로 유지한다
 		String stName = scan.nextLine();
@@ -121,8 +122,8 @@ public class StudentServiceImplV2 extends StudentServiceImplV1 {
 		// 그리고 나머지는 내가 처리할께
 		while (true) {
 			// 왜 this???????
-			// 이 class 에서 사용하여서..
-			StudentDto stDto = inputStudent();
+			// 그냥 써도 되지만 확실하게 하기 위해서
+			StudentDto stDto = this.inputStudent();
 			//stDto에 받은 값이 없으면 멈춤
 			if (stDto == null)
 				break;

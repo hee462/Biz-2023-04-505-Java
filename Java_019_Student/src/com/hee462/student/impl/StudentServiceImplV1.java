@@ -78,7 +78,7 @@ public class StudentServiceImplV1 implements StudentService {
 				}
 				break;
 			}
-			
+			if(intGrade == 0) break;
 
 			System.out.print("전화번호 >> ");
 			String stTel = scan.nextLine();
