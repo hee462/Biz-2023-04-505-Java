@@ -56,15 +56,8 @@ public class BuyerServiceImplV1A implements BuyerService {
 				// TODO: handle exception
 			}
 			
-			
-			
 		}
-		
-		
-		
-
-		// TODO Auto-generated method stub
-
+	
 	}
 	/*
 	 * 화면 출력을 위하여 리스트 머릿글 부준을 System.out.println() 으로 출력하고
@@ -90,19 +83,29 @@ public class BuyerServiceImplV1A implements BuyerService {
 
 	@Override
 	public BuyerDto gerBuyer(String buId) {
-		// TODO Auto-generated method stub
+		// buList에 값이 없다면 loadBuyer(); 호출
+		if(buList.isEmpty()) {
+			loadBuyer();
+
+		}
+		// 매개변수 buId 랑 dto 안에 있는 buId 랑 같으면 dto 보내기
+		for(BuyerDto dto : buList) {
+			if(dto.buId.equals(buId)) {
+				return dto;
+			}
+		}
+		
 		return null;
 	}
 
 	/*
 	 * 현재 buyerList 에 저장된 요소들을 탐색하여 고객ID 가 가장 큰 값을 갖는 요소를 찾아서 고객ID+1 의 값을 return
 	 */
-	// 가장 큰 값을 찾는 코드
 	protected int getmaxId() {
 		int maxId = 0;
 		for (BuyerDto dto : buList) {
 			int intId = Integer.valueOf(dto.buId);
-			//
+			//// 가장 큰 값을 찾는 코드
 			if (intId > maxId)
 				maxId = intId;
 		}
@@ -115,7 +118,7 @@ public class BuyerServiceImplV1A implements BuyerService {
 		String byId = "";
 		BuyerDto bDto = null;
 		while (true) {
-			System.out.printf("고객 ID(%04d) >> 종료하려면 (QUIT)", getmaxId());
+			System.out.printf("고객 ID(%04d) >> ", getmaxId());
 			String buId = scan.nextLine();
 			// Q 처럼 단독 알파벳으로 사용하면 좋을것 같은데??
 			// 입력하는 도중 알파벳은 실수로 자꾸 눌릴수 있어서 실수입력 확율을 줄이기 위해서 단어사용
@@ -123,10 +126,8 @@ public class BuyerServiceImplV1A implements BuyerService {
 			// Enter 누르면
 			if (byId.equals("")) byId = String.format("%04d", getmaxId());
 			try {
-				
 				int intBuId = Integer.valueOf(byId);
 				byId = String.format("%04d", intBuId);
-				
 			} catch (Exception e) {
 				System.out.println(" 고객ID 는 정수로만 입력하세요");
 			}

@@ -13,13 +13,18 @@ package java_020_bank.service;
  */
 
 public interface AccService {
-	public void accInit(); // 신규개설
+	
 	/*
 	 * 계좌번호를 중복되지 않도록 만들기
 	 * 고객ID + 계좌번호 정보가 중복되지 않아야 한다
 	 * AccList에 계좌 정보 항목만 setting 하여 List
 	 * 
 	 */
+	public void accInit(); // 신규개설
+	
+	
+	
+	
 	public void inout();   // 입출금 등록
 	/*
 	 * 계좌번호 조회 :  이미 개설된 계좌인가? 아니면 => 거부
