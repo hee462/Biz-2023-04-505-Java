@@ -1,14 +1,15 @@
 package com.hee462.bank.service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import com.hee462.bank.config.DBContract;
 import com.hee462.bank.models.AccDto;
+import com.hee462.bank.models.AccListDto;
 import com.hee462.bank.models.BuyerDto;
+import com.hee462.bank.service.impl.AccListServiceImplV1;
 import com.hee462.bank.service.impl.AccServiceImplV1;
 import com.hee462.bank.service.impl.BuyerServiceImplV1;
 import com.hee462.bank.utils.Line;
@@ -20,11 +21,13 @@ public class BankService {
 	protected List<AccDto> accList;
 	protected final BuyerService buyerService;
 	protected final AccService accService;
+	protected final AccListService accListService;
 
 	public BankService() {
 		accService = new AccServiceImplV1();
 		buyerService = new BuyerServiceImplV1();
 		scan = new Scanner(System.in);
+		accListService = new AccListServiceImplV1();
 	}
 
 	public void printBuyerList() {
@@ -214,22 +217,125 @@ public class BankService {
 //		maxNum++;
 		maxNum = Integer.valueOf(accService.maxAcNum(todayString)) + 1;
 		String acNum = String.format("%s%02d", todayString, maxNum);
-		System.out.printf("계좌 번호 :", acNum);
 
 		String strId = scan.nextLine();
 		AccDto aDto = new AccDto();
-		AccServiceImplV1 aServiceV1 = new AccServiceImplV1();
-		if (strId.equals(aDto.acBuId)) {
-			System.out.println("계좌개설을 시작합니다.");
-		}
-		System.out.println("업무 선택  >>");
-		System.out.println("1.입출금 계좌 ");
-		System.out.println("2.적금 계좌 ");
-		System.out.println("3.대출 계좌 ");
-		String strSelect = scan.nextLine();
-		if (strSelect.equals("1")) {
-		
-		}
 
+		System.out.printf("계좌 번호 :", aDto.acNum);
+		System.out.printf("계좌번호 >>> %s\n", aDto.acNum);
+		System.out.print("계좌구분(1.입출금 2.적금 3.대출)  >>> ");
+		String strDiv = scan.nextLine();
+		System.out.printf("잔액10000원 >>> ");
+		String strBalance = scan.nextLine();
+		if (strBalance.equals("")) {
+			strBalance = "10000";
+		}
+		System.out.println("=".repeat(100));
+		aDto.acBuId = strId;
+		aDto.acDiv = strDiv;
+		aDto.acBanlance = Integer.valueOf(strBalance);
+		int result = accService.insert(aDto);
+
+		if (result > 0) {
+			System.out.println(Line.dLine(100));
+			System.out.println("계좌개설 완료");
+			System.out.println(Line.dLine(100));
+
+		}
 	}
+
+	public void insertAccList() {
+		AccListDto alDto = new AccListDto();
+		AccDto aDto = new AccDto();
+		
+		//고객 정보 확인
+		//printBuyerList();
+		//findUserInfo();
+		String strAcNum = "";
+		while(true) {
+			System.out.println(Line.sLine(100));
+			System.out.println("입출금 등록");
+			System.out.println(Line.sLine(100));
+			System.out.println("계좌번호를 입력하세요");
+			strAcNum = scan.nextLine();
+			//계좌 번호를 사용하여 tbl_acc 테이블에서 데이터 조회
+			//accDto에는 acNum 계좌번호에 해당하는 데이터가 모두 담긴 상태
+			aDto = accService.findById(strAcNum);
+			
+			if(aDto ==null) System.out.println("계좌번호를 확인하세요.(%s),strAcNum");
+			//continue; 선생님 코드
+			else break;
+		} 
+		
+		System.out.println(" 거래 구분 (1 : 입금 , 2 : 출금  , End : 종료) >>");
+		String strAc = scan.nextLine();
+		int inputMoney = 0;
+		int outputMoney = 0;
+		int total = aDto.acBanlance;
+		if (strAc.equals("1")) {
+			System.out.println("입금액 입력하세요");
+			try {
+				inputMoney = Integer.valueOf(scan.nextLine());
+			//	System.out.println("1111");
+				total += inputMoney;
+			} catch (Exception e) {
+				System.out.println(" 입금액은 숫자로 입력해주세요");
+				
+				// TODO: handle exception
+			}
+			
+		} else if (strAc.equals("2")) {
+			while(true){
+				System.out.println("출금액 입력하세요 (종료: End)");
+				if(strAc.equals("End"))break;
+				try {
+					outputMoney = Integer.valueOf(scan.nextLine());
+					if(aDto.acBanlance < outputMoney) {
+						System.out.printf("잔액(%d)이 부족합니다",aDto.acBanlance);
+						continue;
+					}else {
+						total += outputMoney;
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println(" 입금액은 숫자로 입력해주세요");
+					// TODO: handle exception
+				}
+			}
+		}else if( strAc.equals("End")) {
+			System.out.println("업무를 종료합니다"); 
+			
+		}
+	//	System.out.println("2222");
+		// 잔액이 맞는지 확인해보기
+//		if(1==1) {
+//			System.out.println(total);
+//			return;
+//		}
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat today = new SimpleDateFormat("YYYY-MM-dd");
+		String todayString = today.format(date);
+		SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
+		String timeString = time.format(date);
+		alDto.aioDate = todayString;
+		alDto.aioTime = timeString;
+		alDto.acNum   = strAcNum;
+		alDto.aioDiv  = strAc;
+		alDto.aioInput  = inputMoney;
+		alDto.aioOutput = outputMoney;
+		//  새로 입력된 값을 result 에 담아서 제대로 입력됬는지 확인
+		int result = accListService.insert(alDto);
+		if(result < 1) {
+			System.out.println("계좌 거래 실패");
+			return;
+		}
+		// 잔액 업데이트 해주기
+		// 새로운 잔액 저장
+		aDto.acBanlance =  total;
+		//업데이트
+		int result2 = accService.update(aDto);
+		System.out.println("계좌 거래 완료");
+		System.out.printf("거래일자(%s) 잔액(%s) :" ,result ,result2);
+	}
+
 }
